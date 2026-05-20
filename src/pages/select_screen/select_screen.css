@@ -1,0 +1,57 @@
+/* select_screen.css */
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    font-family: inherit;
+}
+
+p {
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.start {
+    width: 100%;
+}
+.buttonDiv {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.title {
+    font-size: 3rem;
+    letter-spacing: 8px;
+    color: #DFD0B8;
+}
+
+button {
+    background-color: #1e242c;
+    color: #DFD0B8;
+    border: none;
+    padding: 10px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    letter-spacing: 3px;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background-color: #DFD0B8;
+    color: #222831;
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    letter-spacing: 3px;
+}
+
+button.active {
+    background-color: #DFD0B8;
+    color: #222831;
+}
