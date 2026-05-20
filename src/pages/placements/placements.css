@@ -1,0 +1,103 @@
+/* placements.css */
+
+.main {
+    font-family: inherit;
+    color: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.ship-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+.ship-div > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #1e242c;
+    color: #DFD0B8;
+    border: none;
+    padding: 10px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    letter-spacing: 3px;
+    transition: all 0.3s;
+}
+.ship-div > div:hover {
+    background-color: #DFD0B8;
+    color: #222831;
+}
+.ship-div > div > h3 {
+    font-size: 20px;
+}
+.ship-div > div > p {
+    font-size: 13px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    background-color: #DFD0B8;
+    border: 2px solid #6d5c41;
+}
+.grid-div {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #6d5c41;
+}
+.grid-div:hover {
+    background-color: #222831;
+}
+
+.sec-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+}
+
+.sec-right-div {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+}
+.sec-right-div > :nth-child(1) {
+    margin-bottom: auto;
+}
+
+
+.rand-button {
+    padding: 25px;
+    margin-bottom: 15px;
+}
+.confirm-button {
+    padding: 40px;
+}
+.confirm-button:hover {
+    background-color: #4a7c59;
+    color: #222831;
+}
+
+.confirm-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    letter-spacing: 3px;
+}
+
+
+/* same as select_screen */
+
+button.active {
+    background-color: #DFD0B8;
+    color: #222831;
+}
+
