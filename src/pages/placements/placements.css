@@ -53,9 +53,9 @@
     height: 40px;
     border: 2px solid #6d5c41;
 }
-.grid-div:hover {
+/* .grid-div:hover {
     background-color: #222831;
-}
+} */
 
 .sec-div {
     display: flex;
@@ -96,8 +96,12 @@
 
 /* same as select_screen */
 
-button.active {
+.ship.active {
     background-color: #DFD0B8;
     color: #222831;
+}
+
+.highlight {
+    background-color: #4a7c59;
 }
 
