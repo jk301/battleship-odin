@@ -1,5 +1,16 @@
 /* styles.css */
+
 body {
-  background-color: antiquewhite;
-  color: navy;
+    background-color: #222831;
+    color: #DFD0B8;
+    font-family:'Courier New', Courier, monospace;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#root {
+    padding: 0px 20px 20px 20px;
+    background-color: #393E46;
+    width: fit-content;
 }
