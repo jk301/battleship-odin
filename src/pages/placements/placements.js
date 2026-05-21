@@ -1,9 +1,10 @@
 // placements.js
 import "./placements.css"
 import { Ship } from "../../ship/ship.js"
+import { randomPlacement } from '../random/random.js'
 
 
-export function placements (choice, player, onConfirm) {
+export function placements (choice, player, who, onConfirm) {
 
     console.log("The choice is " + choice)
     const main = document.createElement('div')
@@ -23,11 +24,12 @@ export function placements (choice, player, onConfirm) {
     const secRightDiv = document.createElement('div')
     secRightDiv.classList.add('sec-right-div')
 
-    const help = helpText()
+    const help = helpText(who)
 
     const rand = document.createElement('button')
     rand.classList.add('rand-button')
     rand.textContent = "Randomize"
+    
 
     const confirm = document.createElement('button')
     confirm.classList.add('confirm-button')
@@ -37,6 +39,19 @@ export function placements (choice, player, onConfirm) {
     confirm.addEventListener('click', () => {
         onConfirm()
     })
+
+    rand.addEventListener('click', () => {
+        resetBoard(cells, player.board.getBoard())
+        randomPlacement(player.board)
+        console.log(player.board.getBoard())
+        updateBoard(cells, player.board.getBoard())
+        ships.forEach(ship => {
+            ship.dataset.placed = true
+            ship.classList.add('disabled')
+        })
+        confirm.disabled = false
+    })
+
 
     const gridCells = setupCells(cells, allShips.getCurrShip, allShips.resetShip, ships,  player.board, confirm)
 
@@ -106,14 +121,18 @@ function Grid () {
 }
 
 
-function helpText () {
+function helpText (who) {
     // may add more. thats why a separate func
     const main = document.createElement('div')
     main.classList.add('help-text')
 
-    const rotate = document.createElement('p')
-    rotate.textContent = " (*) -> press mouse right click to rotate."
+    const playerWho = document.createElement('p')
+    playerWho.textContent = `${who} - Place your ships.`
 
+    const rotate = document.createElement('p')
+    rotate.textContent = " (*) - press mouse right click to rotate."
+
+    main.appendChild(playerWho)
     main.appendChild(rotate)
     return main
 }
@@ -251,5 +270,26 @@ function setupCells (cells, getShip, resetShip, ships, board, confirm) {
                 }
             }
         })
+    })
+}
+
+export function updateBoard (cells, board) {
+    cells.forEach(cell => {
+        const x = Number(cell.dataset.x)
+        const y = Number(cell.dataset.y)
+
+        console.log(board[0])
+        if (board[x][y] !== null) cell.classList.add('placed')
+    })
+}
+
+export function resetBoard (cells, board) {
+    cells.forEach(cell => {
+        const x = Number(cell.dataset.x)
+        const y = Number(cell.dataset.y)
+
+        console.log(board[0])
+        board[x][y] = null
+        cell.classList.remove('placed')
     })
 }
