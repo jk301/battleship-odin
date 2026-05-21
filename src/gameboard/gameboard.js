@@ -35,6 +35,27 @@ export function gameBoard () {
         
     }
 
+    function checkShip (coords, ship, orient = "ver") {
+        if (coords[0] < 0 || coords[0] > 9 || coords[1] < 0 || coords[1] > 9 ) return false
+
+        if (orient === "hor") {
+
+            for (let i = 0; i < ship.length; i++) {
+                if (coords[0] + i > 9) return false
+                if (board[coords[0] + i][coords[1]] !== null) return false
+            }
+            return true
+
+        } else if (orient === "ver") {
+
+            for (let i = 0; i < ship.length; i++) {
+                if (coords[1] + i > 9) return false
+                if (board[coords[0]][coords[1] + i] !== null) return false
+            }
+            return true
+        } 
+    }
+
     function receiveAttack (coords) {
         if (coords[0] < 0 || coords[0] > 9 || coords[1] < 0 || coords[1] > 9 ) return "out-of-bounds"
 
@@ -78,9 +99,11 @@ export function gameBoard () {
 
     return {
         putShip,
+        checkShip,
         receiveAttack,
         allShipSunk,
         missedShots,
         hitShots,
+        getBoard: () => board,
     }
 }
