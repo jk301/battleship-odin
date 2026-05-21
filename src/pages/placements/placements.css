@@ -105,3 +105,16 @@
     background-color: #4a7c59;
 }
 
+.placed {
+    background-color: #393E46;
+}
+
+.invalid {
+    background-color: #c0392b;
+}
+
+.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    letter-spacing: 3px;
+}
