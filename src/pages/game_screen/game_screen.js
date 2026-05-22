@@ -2,6 +2,7 @@
 import "./game_screen.css"
 import { updateBoard, Grid } from "../placements/placements.js"
 import { gameOver } from "../game_over/game_over.js"
+import { passScreen } from "../pass_screen/pass_screen.js"
 
 export function gameScreen (P1, P2, choice, onRestart) {
     const main = document.createElement('div')
@@ -30,10 +31,17 @@ export function gameScreen (P1, P2, choice, onRestart) {
     const P2_cells = P2_grid.querySelectorAll('.grid-div')
 
     updateBoard(P1_cells, P1.board.getBoard())
-    updateBoard(P2_cells, P2.board.getBoard())
+    // for testing :)
+    // updateBoard(P2_cells, P2.board.getBoard())
+
+    const delay = ms => new Promise(res => setTimeout(res, ms))
+
+    let thinking = false
 
     P2_cells.forEach (cell => {
-        cell.addEventListener('click', () => {
+        cell.addEventListener('click', async () => {
+            if (thinking) return
+
             let x = Number(cell.dataset.x)
             let y = Number(cell.dataset.y)
 
@@ -44,25 +52,33 @@ export function gameScreen (P1, P2, choice, onRestart) {
 
             markCell(P2_cells, [x, y], attack)
 
+            head.trn.textContent = choice
+
             if (P2.board.allShipSunk() === true) {
                 main.appendChild(gameOver('Player - 1', choice, onRestart))
                 return
             }
             
-            if (choice === "computer"){
+            if (choice === "computer") {
+
+                thinking = true
+
+                await delay(450)
+
                 const counter = P2.adjAttack(P1)
                 const lastShot = P2.attemShots.at(-1)
 
-                if (counter === 'already-hit') return
-
                 markCell(P1_cells, lastShot, counter)
+
+                head.trn.textContent = 'Player - 1'
 
                 if (P1.board.allShipSunk() === true) {
                     main.appendChild(gameOver(p2Name, choice, onRestart))
                     return
                 }
-            }
 
+                thinking = false
+            }
         })
     })
 
