@@ -50,7 +50,7 @@ export function gameScreen (P1, P2, choice, onRestart) {
             }
             
             if (choice === "computer"){
-                const counter = P2.randomAttack(P1)
+                const counter = P2.adjAttack(P1)
                 const lastShot = P2.attemShots.at(-1)
 
                 if (counter === 'already-hit') return
