@@ -61,7 +61,7 @@ export function gameBoard () {
 
         for (let i of hitShots) {
             if (i[0] === coords[0] && i[1] === coords[1]) {
-                return "Already-hit"
+                return "already-hit"
             }
         }
 
