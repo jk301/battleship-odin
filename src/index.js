@@ -13,18 +13,21 @@ function showNow (page) {
     root.appendChild(page)
 }
 
-const select = select_screen((choice) => {
+function startGame(choice) {
     const P1 = Player()
     const P2 = Player()
 
-    showNow(placements(choice, P1, 'Player 1 ',() => {
+    showNow(placements(choice, P1, 'Player 1', () => {
         if (choice === "player") {
-            showNow(placements(choice, P2, 'Player 2 ', () => showNow(gameScreen(P1, P2, choice))))
+            showNow(placements(choice, P2, 'Player 2', () => {
+                showNow(gameScreen(P1, P2, choice, () => startGame(choice)))
+            }))
         } else if (choice === 'computer') {
             randomPlacement(P2.board)
-            showNow(gameScreen(P1, P2, choice))
+            showNow(gameScreen(P1, P2, choice, () => startGame(choice)))
         }
     }))
-})
+}
 
+const select = select_screen((choice) => startGame(choice))
 showNow(select)
