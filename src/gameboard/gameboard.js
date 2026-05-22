@@ -82,6 +82,13 @@ export function gameBoard () {
         }
     }
 
+    function isShipSunkAt (coords) {
+        const ship = board[coords[0]][coords[1]]
+        if (ship === null) return false
+
+        return ship.isSunk()
+    }
+
     function allShipSunk () {
         let allShips = new Set()
 
@@ -109,7 +116,8 @@ export function gameBoard () {
         receiveAttack,
         allShipSunk,
         missedShots,
-        hitShots,
+        getHitShots: () => hitShots,
         getBoard: () => board,
+        isShipSunkAt,
     }
 }
