@@ -127,10 +127,10 @@ function helpText (who) {
     main.classList.add('help-text')
 
     const playerWho = document.createElement('p')
-    playerWho.textContent = `${who} - Place your ships.`
+    playerWho.textContent = `[ ${who} ] - Place your ships.`
 
     const rotate = document.createElement('p')
-    rotate.textContent = " (*) - press mouse right click to rotate."
+    rotate.textContent = " [ * ] - press mouse right click to rotate."
 
     main.appendChild(playerWho)
     main.appendChild(rotate)
