@@ -31,6 +31,7 @@
     padding: 0 40px;
     font-size: 1.2rem;
     letter-spacing: 5px;
+    width: 180px;
 }
 .turn-div > :first-child {
     font-size: 25px;
