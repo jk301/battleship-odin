@@ -102,7 +102,7 @@ function shipDiv () {
 }
 
 
-function Grid () {
+export function Grid () {
     const main = document.createElement('div')
     main.classList.add('grid')
 
