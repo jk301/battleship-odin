@@ -24,9 +24,36 @@ export function Player () {
         return opponent.board.receiveAttack([num1, num2])
     }
 
+    function adjAttack (opponent) {
+        const hits = opponent.board.getHitShots()
+
+        if (hits.length === 0) {
+            return randomAttack(opponent)
+        } else {
+            const lastHit = hits.at(-1)
+            let validShots = [
+                [lastHit[0] + 1, lastHit[1]],
+                [lastHit[0] - 1, lastHit[1]],
+                [lastHit[0], lastHit[1] + 1],
+                [lastHit[0], lastHit[1] - 1],
+            ]
+
+            validShots = validShots.filter(i => i[0] >= 0 && i[0] <= 9 && i[1] >= 0 && i[1] <= 9)
+            validShots = validShots.filter(i => !attemShots.some(k => k[0] === i[0] && k[1] === i[1]))
+
+            if (validShots.length === 0) {
+                return randomAttack(opponent)
+            } else {
+                return attack(opponent, validShots[0])
+            }
+        }
+    }
+
+
     return {
         attack,
         randomAttack,
+        adjAttack,
         board,
         attemShots,
     }
