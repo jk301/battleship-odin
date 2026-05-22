@@ -65,6 +65,12 @@ export function gameBoard () {
             }
         }
 
+        for (let i of missedShots) {
+            if (i[0] === coords[0] && i[1] === coords[1]) {
+                return "already-hit"
+            }
+        }
+
         if (board[coords[0]][coords[1]] === null) {
             missedShots.push(coords)
             return "miss"
