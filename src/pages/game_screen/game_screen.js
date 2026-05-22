@@ -1,8 +1,9 @@
 // game_screen.js
 import "./game_screen.css"
 import { updateBoard, Grid } from "../placements/placements.js"
+import { gameOver } from "../game_over/game_over.js"
 
-export function gameScreen (P1, P2, choice) {
+export function gameScreen (P1, P2, choice, onRestart) {
     const main = document.createElement('div')
     main.classList.add('main-game-screen')
 
@@ -37,14 +38,29 @@ export function gameScreen (P1, P2, choice) {
             let y = Number(cell.dataset.y)
 
             const attack = P1.attack(P2, [x, y])
+            console.log(attack)
+
+            if (attack === 'already-hit') return
 
             markCell(P2_cells, [x, y], attack)
+
+            if (P2.board.allShipSunk() === true) {
+                main.appendChild(gameOver('Player - 1', choice, onRestart))
+                return
+            }
             
             if (choice === "computer"){
                 const counter = P2.randomAttack(P1)
                 const lastShot = P2.attemShots.at(-1)
 
+                if (counter === 'already-hit') return
+
                 markCell(P1_cells, lastShot, counter)
+
+                if (P1.board.allShipSunk() === true) {
+                    main.appendChild(gameOver(p2Name, choice, onRestart))
+                    return
+                }
             }
 
         })
@@ -85,22 +101,16 @@ function header (player1, turn, player2) {
 
 function markCell(cells, coords, result) {
     cells.forEach(cell => {
+
+        // just in case
+        if (result === 'already-hit') return
+
         if (Number(cell.dataset.x) === coords[0] && Number(cell.dataset.y) === coords[1]) {
             if (result === 'hit') {
                 cell.classList.add('hit')
             } else if (result === 'miss') {
                 cell.classList.add('miss')
-            } else if (result === 'already-hit') return
+            } 
         }
     })
 }
-
-// export function updateBoard (cells, board) {
-//     cells.forEach(cell => {
-//         const x = Number(cell.dataset.x)
-//         const y = Number(cell.dataset.y)
-
-//         console.log(board[0])
-//         if (board[x][y] !== null) cell.classList.add('placed')
-//     })
-// }
