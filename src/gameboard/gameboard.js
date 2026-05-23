@@ -115,7 +115,7 @@ export function gameBoard () {
         checkShip,
         receiveAttack,
         allShipSunk,
-        missedShots,
+        getMissedShots: () => missedShots,
         getHitShots: () => hitShots,
         getBoard: () => board,
         isShipSunkAt,
