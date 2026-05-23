@@ -52,32 +52,37 @@ export function gameScreen (P1, P2, choice, onRestart) {
 
             markCell(P2_cells, [x, y], attack)
 
-            head.trn.textContent = choice
 
             if (P2.board.allShipSunk() === true) {
                 main.appendChild(gameOver('Player - 1', choice, onRestart))
                 return
             }
             
-            if (choice === "computer") {
+            if (attack === 'miss') {
+                head.trn.textContent = choice
 
-                thinking = true
+                if (choice === "computer") {
 
-                await delay(450)
+                    thinking = true
 
-                const counter = P2.adjAttack(P1)
-                const lastShot = P2.attemShots.at(-1)
+                    let counter
+                    do {
+                        await delay(450)
+                        counter = P2.adjAttack(P1)
+                        const lastShot = P2.attemShots.at(-1)
+                        markCell(P1_cells, lastShot, counter)
 
-                markCell(P1_cells, lastShot, counter)
+                        if (P1.board.allShipSunk()) {
+                            main.appendChild(gameOver(p2Name, choice, onRestart))
+                            return
+                        }
 
-                head.trn.textContent = 'Player - 1'
+                    } while (counter === 'hit')
+                    
+                    head.trn.textContent = 'Player - 1'
+                    thinking = false
 
-                if (P1.board.allShipSunk() === true) {
-                    main.appendChild(gameOver(p2Name, choice, onRestart))
-                    return
                 }
-
-                thinking = false
             }
         })
     })
