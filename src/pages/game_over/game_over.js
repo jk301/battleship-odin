@@ -1,7 +1,7 @@
 // game_over.js
 import "./game_over.css"
 
-export function gameOver (winner, choice,  onRestart) {
+export function gameOver (winner, choice, onRestart) {
     const main = document.createElement('div')
     main.classList.add('game-over')
 
