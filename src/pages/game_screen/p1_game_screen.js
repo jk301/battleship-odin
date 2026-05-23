@@ -60,7 +60,7 @@ export function p1_gameScreen (P1, P2, choice, onRestart, onDone) {
             }
 
             await delay(450)
-            onDone()
+            if (attack === 'miss') onDone()
             
         })
     })
