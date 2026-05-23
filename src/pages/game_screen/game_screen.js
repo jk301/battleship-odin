@@ -130,3 +130,14 @@ function markCell(cells, coords, result) {
         }
     })
 }
+
+
+export function updateHiddenBoard(cells, hitShots, missedShots) {
+    cells.forEach(cell => {
+        const x = Number(cell.dataset.x)
+        const y = Number(cell.dataset.y)
+
+        if (hitShots.some(s => s[0] === x && s[1] === y)) cell.classList.add('hit')
+        if (missedShots.some(s => s[0] === x && s[1] === y)) cell.classList.add('miss')
+    })
+}
