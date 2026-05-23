@@ -165,6 +165,16 @@ function setupCells (cells, getShip, resetShip, ships, board, confirm) {
         cell.addEventListener('contextmenu', (e) => {
             e.preventDefault() // stops from opening menu
             orient = orient === 'ver' ? 'hor' : 'ver'
+
+            // highlights clear
+            cells.forEach(c => {
+                c.classList.remove('highlight')
+                c.classList.remove('invalid')
+            })
+
+            // re-trigger mouseover on current cell
+            cell.dispatchEvent(new Event('mouseover'))
+            
         })
         cell.addEventListener('mouseover', () => {
             if (getShip().name === null) {
